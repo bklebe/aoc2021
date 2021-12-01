@@ -11,10 +11,11 @@ pub fn second(input: String) -> usize {
 fn count_increased(width: usize, data: Vec<i32>) -> usize {
     data.windows(width)
         .map(|w| -> i32 { w.iter().sum() })
-        .collect::<Vec<_>>()
-        .windows(2)
-        .filter(|w| w[1] > w[0])
-        .count()
+        .fold((0, None), |(count, last), w| match last {
+            Some(last) if w > last => (count + 1, Some(w)),
+            _ => (count, Some(w)),
+        })
+        .0
 }
 
 fn preprocess(input: String) -> Vec<i32> {
