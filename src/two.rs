@@ -1,32 +1,37 @@
 pub fn first(input: &str) -> i32 {
-    let (mut horizontal, mut depth) = (0, 0);
-    for line in input.lines() {
-        let value: i32 = line.split(' ').last().unwrap().parse().unwrap();
-        match &line[..1] {
-            "f" => horizontal += value,
-            "d" => depth += value,
-            "u" => depth -= value,
-            _ => (),
-        }
-    }
+    let (horizontal, depth) = input
+        .lines()
+        .map(|l| {
+            (
+                &l[..1],
+                l.split(' ').last().unwrap().parse::<i32>().unwrap(),
+            )
+        })
+        .fold((0, 0), |(h, d), (c, v)| match c {
+            "f" => (h + v, d),
+            "d" => (h, d + v),
+            "u" => (h, d - v),
+            _ => (h, d),
+        });
 
     horizontal * depth
 }
 
 pub fn second(input: &str) -> i32 {
-    let (mut horizontal, mut depth, mut aim) = (0, 0, 0);
-    for line in input.lines() {
-        let value: i32 = line.split(' ').last().unwrap().parse().unwrap();
-        match &line[..1] {
-            "f" => {
-                horizontal += value;
-                depth += aim * value;
-            }
-            "d" => aim += value,
-            "u" => aim -= value,
-            _ => (),
-        }
-    }
+    let (horizontal, depth, _) = input
+        .lines()
+        .map(|l| {
+            (
+                &l[..1],
+                l.split(' ').last().unwrap().parse::<i32>().unwrap(),
+            )
+        })
+        .fold((0, 0, 0), |(h, d, a), (c, v)| match c {
+            "f" => (h + v, d + a * v, a),
+            "d" => (h, d, a + v),
+            "u" => (h, d, a - v),
+            _ => (h, d, a),
+        });
 
     horizontal * depth
 }
