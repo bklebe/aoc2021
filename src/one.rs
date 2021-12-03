@@ -1,9 +1,9 @@
-pub fn first(input: String) -> usize {
+pub fn first(input: &str) -> usize {
     let input = preprocess(input);
     count_increased(1, input)
 }
 
-pub fn second(input: String) -> usize {
+pub fn second(input: &str) -> usize {
     let input = preprocess(input);
     count_increased(3, input)
 }
@@ -17,6 +17,6 @@ fn count_increased(width: usize, data: Vec<i32>) -> usize {
         .count()
 }
 
-fn preprocess(input: String) -> Vec<i32> {
+fn preprocess(input: &str) -> Vec<i32> {
     input.lines().map(|l| l.parse().unwrap()).collect()
 }

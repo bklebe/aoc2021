@@ -6,10 +6,12 @@ mod two;
 
 fn main() {
     let one = r("input/one.txt");
-    println!("one, first: {}", one::first(one.clone()));
-    println!("one, second: {}", one::second(one.clone()));
+    println!("one, first: {}", one::first(&one));
+    println!("one, second: {}", one::second(&one));
+
     let two = r("input/two.txt");
-    println!("two, first: {}", two::first(two));
+    println!("two, first: {}", two::first(&two));
+    println!("two, second: {}", two::second(&two));
 }
 
 fn r(path: &str) -> String {
