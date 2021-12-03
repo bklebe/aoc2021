@@ -2,10 +2,14 @@ use std::fs::File;
 use std::io::Read;
 
 mod one;
+mod two;
 
 fn main() {
-    println!("{}", one::first(r("input/one.txt")));
-    println!("{}", one::second(r("input/one.txt")));
+    let one = r("input/one.txt");
+    println!("one, first: {}", one::first(one.clone()));
+    println!("one, second: {}", one::second(one.clone()));
+    let two = r("input/two.txt");
+    println!("two, first: {}", two::first(two));
 }
 
 fn r(path: &str) -> String {
